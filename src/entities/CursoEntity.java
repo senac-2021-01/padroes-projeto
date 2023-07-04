@@ -11,6 +11,12 @@ public class CursoEntity {
         return this.id == ((CursoEntity) obj).getId();
     }
 
+    @Override
+    public String toString() {
+        return new StringBuilder("ID: ").append(this.id).append(", nome: ").append(this.nome)
+                .append(", descrição: ").append(this.descricao).toString();
+    }
+
     public void setId(int id) {
         this.id = id;
     }

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import src.entities.AlunoEntity;
+import src.entities.CursoEntity;
 import src.services.AlunoService;
 import src.services.CursoService;
 
@@ -62,6 +63,7 @@ public class Main {
             String nome;
             String descricao;
             AlunoEntity aluno;
+            CursoEntity curso;
 
             switch (opcao) {
                 case 1:
@@ -85,10 +87,57 @@ public class Main {
                     }
                     break;
                 case 2:
+                    System.out.println("Informe o ID do curso:");
+                    idCurso = readInt();
+
+                    curso = cursoService.getByID(idCurso);
+
+                    if (curso != null) {
+                        System.out.println(curso);
+                    } else {
+                        System.out.println("Curso não encontrado");
+                    }
+
                     break;
                 case 3:
+                    System.out.println("Informe o ID do curso:");
+                    idCurso = readInt();
+
+                    curso = cursoService.getByID(idCurso);
+
+                    if (curso != null) {
+                        System.out.println("Informe o novo nome do curso:");
+                        nome = scanner.nextLine();
+
+                        System.out.println("Informe a nova descrição do curso:");
+                        descricao = scanner.nextLine();
+
+                        if (cursoService.update(idCurso, nome, descricao) == true) {
+                            System.out.println("Curso alterado com sucesso");
+                        } else {
+                            System.out.println("Falha ao tentar alterar o curso");
+                        }
+                    } else {
+                        System.out.println("Curso não encontrado");
+                    }
+
                     break;
                 case 4:
+                    System.out.println("Informe o ID do curso:");
+                    idCurso = readInt();
+
+                    curso = cursoService.getByID(idCurso);
+
+                    if (curso != null) {
+                        if (cursoService.delete(idCurso) == true) {
+                            System.out.println("Curso removido com sucesso");
+                        } else {
+                            System.out.println("Falha ao tentar remover o curso");
+                        }
+                    } else {
+                        System.out.println("Curso não encontrado");
+                    }
+
                     break;
                 case 5:
                     System.out.println("Informe a matrícula do aluno:");
@@ -171,73 +220,6 @@ public class Main {
                     break;
             }
         } while (opcao != 9);
-
-        // insertAluno(10, "Maria", true);
-        // insertAluno(20, "Pedro", false);
-        // insertAluno(30, "João", true);
-        // insertAluno(40, "Antônio", false);
-        // insertAluno(50, "José", true);
-        // insertAluno(60, "Facebookison", false);
-
-        // System.out.println(alunoService.size());
-
-        // System.out.println(alunoService.getByMatricula(40));
-        // System.out.println(alunoService.getByMatricula(70));
-
-        // AlunoEntity a1 = alunoService.getByMatricula(50);
-
-        // System.out.println(a1.getMatricula());
-        // System.out.println(a1.getNome());
-        // System.out.println(a1.isAtivo());
-
-        // a1.setNome("José Antônio");
-        // a1.setAtivo(false);
-
-        // alunoService.update(a1);
-
-        // AlunoEntity a2 = alunoService.getByMatricula(50);
-
-        // System.out.println(a2.getMatricula());
-        // System.out.println(a2.getNome());
-        // System.out.println(a2.isAtivo());
-
-        // alunoService.delete(a2);
-
-        // System.out.println(alunoService.getByMatricula(50));
-
-        // AlunoEntity a2 = a1;
-
-        // a2.setMatricula(10);
-
-        // a2 = null;
-
-        // System.out.println(a1.getMatricula());
-
-        // a1 = null;
-
-        // AlunoEntity a3 = AlunoEntity.getInstance();
-
-        // System.out.println(a3.getMatricula());
-
-        // a3 = null;
-
-        // AlunoEntity a4 = AlunoEntity.getInstance();
-
-        // a4.setMatricula(20);
-        // a4.setNome("Maria");
-        // a4.setAtivo(true);
-
-        // a4 = null;
-
-        // AlunoEntity a5 = AlunoEntity.getInstance();
-
-        // a5.setNome("Pedro");
-
-        // System.out.println(a5.getMatricula());
-        // System.out.println(a5.getNome());
-        // System.out.println(a5.isAtivo());
-
-        // a5 = null;
     }
 
 }
