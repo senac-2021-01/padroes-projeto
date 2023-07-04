@@ -15,7 +15,8 @@ public class AlunoEntity {
     @Override
     public String toString() {
         return new StringBuilder("Matrícula: ").append(this.matricula).append(", nome: ").append(this.nome)
-                .append(", ativo: ").append(this.ativo == true ? "Sim" : "Não").append(" - Dados do curso - ").append(this.curso)
+                .append(", ativo: ").append(this.ativo == true ? "Sim" : "Não").append(", curso: ")
+                .append(this.curso.getNome())
                 .toString();
     }
 

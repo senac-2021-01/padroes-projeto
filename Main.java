@@ -129,10 +129,14 @@ public class Main {
                     curso = cursoService.getByID(idCurso);
 
                     if (curso != null) {
-                        if (cursoService.delete(idCurso) == true) {
-                            System.out.println("Curso removido com sucesso");
+                        if (curso.getAlunosSize() == 0) {
+                            if (cursoService.delete(idCurso) == true) {
+                                System.out.println("Curso removido com sucesso");
+                            } else {
+                                System.out.println("Falha ao tentar remover o curso");
+                            }
                         } else {
-                            System.out.println("Falha ao tentar remover o curso");
+                            System.out.println("O curso não pode ser excluído, pois possui alunos matriculados");
                         }
                     } else {
                         System.out.println("Curso não encontrado");
@@ -223,6 +227,8 @@ public class Main {
 
                     if (aluno != null) {
                         if (alunoService.delete(matricula) == true) {
+                            aluno.getCurso().deleteAluno(aluno);
+
                             System.out.println("Aluno removido com sucesso");
                         } else {
                             System.out.println("Falha ao tentar remover o aluno");
