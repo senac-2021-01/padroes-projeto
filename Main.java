@@ -140,22 +140,31 @@ public class Main {
 
                     break;
                 case 5:
-                    System.out.println("Informe a matrícula do aluno:");
-                    matricula = readInt();
+                    System.out.println("Informe o ID do curso do aluno:");
+                    idCurso = readInt();
 
-                    if (matricula > 0) {
-                        System.out.println("Informe o nome do aluno:");
-                        nome = scanner.nextLine();
+                    curso = cursoService.getByID(idCurso);
 
-                        boolean ativo = true;
+                    if (curso != null) {
+                        System.out.println("Informe a matrícula do aluno:");
+                        matricula = readInt();
 
-                        if (alunoService.insert(matricula, nome, ativo) == true) {
-                            System.out.println("Aluno inserido com sucesso");
+                        if (matricula > 0) {
+                            System.out.println("Informe o nome do aluno:");
+                            nome = scanner.nextLine();
+
+                            boolean ativo = true;
+
+                            if (alunoService.insert(matricula, nome, ativo, curso) == true) {
+                                System.out.println("Aluno inserido com sucesso");
+                            } else {
+                                System.out.println("Falha ao tentar inserir o aluno");
+                            }
                         } else {
-                            System.out.println("Falha ao tentar inserir o aluno");
+                            System.out.println("Matrícula inválida, favor informar somente números inteiros positivos");
                         }
                     } else {
-                        System.out.println("Matrícula inválida, favor informar somente números inteiros positivos");
+                        System.out.println("Curso não encontrado");
                     }
 
                     break;
@@ -179,16 +188,25 @@ public class Main {
                     aluno = alunoService.getByMatricula(matricula);
 
                     if (aluno != null) {
-                        System.out.println("Informe o novo nome do aluno:");
-                        nome = scanner.nextLine();
+                        System.out.println("Informe o ID do novo curso do aluno:");
+                        idCurso = readInt();
 
-                        System.out.println("Informe se o aluno está ativo (S/N):");
-                        boolean ativo = readAtivo();
+                        curso = cursoService.getByID(idCurso);
 
-                        if (alunoService.update(matricula, nome, ativo) == true) {
-                            System.out.println("Aluno alterado com sucesso");
+                        if (curso != null) {
+                            System.out.println("Informe o novo nome do aluno:");
+                            nome = scanner.nextLine();
+
+                            System.out.println("Informe se o aluno está ativo (S/N):");
+                            boolean ativo = readAtivo();
+
+                            if (alunoService.update(matricula, nome, ativo, curso) == true) {
+                                System.out.println("Aluno alterado com sucesso");
+                            } else {
+                                System.out.println("Falha ao tentar alterar o aluno");
+                            }
                         } else {
-                            System.out.println("Falha ao tentar alterar o aluno");
+                            System.out.println("Curso não encontrado");
                         }
                     } else {
                         System.out.println("Aluno não encontrado");
