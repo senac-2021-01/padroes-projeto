@@ -6,6 +6,7 @@ public class CursoEntity {
     private String nome;
     private String descricao;
 
+    @Override
     public boolean equals(Object obj) {
         return this.id == ((CursoEntity) obj).getId();
     }

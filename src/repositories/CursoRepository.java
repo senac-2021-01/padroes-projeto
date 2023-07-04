@@ -23,4 +23,38 @@ public class CursoRepository {
         return instance;
     }
 
+    public boolean insert(CursoEntity curso) {
+        return this.cursos.add(curso);
+    }
+
+    public CursoEntity getByID(int id) {
+        CursoEntity curso = new CursoEntity();
+
+        curso.setId(id);
+
+        int index = this.cursos.indexOf(curso);
+
+        if (index >= 0) {
+            return this.cursos.get(index);
+        }
+
+        return null;
+    }
+
+    public boolean update(CursoEntity curso) {
+        int index = this.cursos.indexOf(curso);
+
+        if (index >= 0) {
+            this.cursos.set(index, curso);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean delete(CursoEntity curso) {
+        return this.cursos.remove(curso);
+    }
+
 }

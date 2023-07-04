@@ -2,12 +2,14 @@ import java.util.Scanner;
 
 import src.entities.AlunoEntity;
 import src.services.AlunoService;
+import src.services.CursoService;
 
 public class Main {
 
     private static Scanner scanner = new Scanner(System.in);
 
     private static AlunoService alunoService = AlunoService.getInstance();
+    private static CursoService cursoService = CursoService.getInstance();
 
     public static int readInt() {
         boolean valorInvalido = true;
@@ -51,16 +53,44 @@ public class Main {
 
         do {
             System.out.println(
-                    "1 - Cadastrar Aluno\n2 - Pesquisar Aluno\n3 - Alterar Aluno\n4 - Excluir Aluno\n5 - Sair");
+                    "1 - Cadastrar Curso\n2 - Pesquisar Curso\n3 - Alterar Curso\n4 - Excluir Curso\n5 - Cadastrar Aluno\n6 - Pesquisar Aluno\n7 - Alterar Aluno\n8 - Excluir Aluno\n9 - Sair");
 
             opcao = readInt();
 
             int matricula;
+            int idCurso;
             String nome;
+            String descricao;
             AlunoEntity aluno;
 
             switch (opcao) {
                 case 1:
+                    System.out.println("Informe o ID do curso:");
+                    idCurso = readInt();
+
+                    if (idCurso > 0) {
+                        System.out.println("Informe o nome do curso:");
+                        nome = scanner.nextLine();
+
+                        System.out.println("Informe a descrição do curso:");
+                        descricao = scanner.nextLine();
+
+                        if (cursoService.insert(idCurso, nome, descricao) == true) {
+                            System.out.println("Curso inserido com sucesso");
+                        } else {
+                            System.out.println("Falha ao tentar inserir o curso");
+                        }
+                    } else {
+                        System.out.println("ID inválido, favor informar somente números inteiros positivos");
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
                     System.out.println("Informe a matrícula do aluno:");
                     matricula = readInt();
 
@@ -80,7 +110,7 @@ public class Main {
                     }
 
                     break;
-                case 2:
+                case 6:
                     System.out.println("Informe a matrícula do aluno:");
                     matricula = readInt();
 
@@ -93,7 +123,7 @@ public class Main {
                     }
 
                     break;
-                case 3:
+                case 7:
                     System.out.println("Informe a matrícula do aluno:");
                     matricula = readInt();
 
@@ -116,7 +146,7 @@ public class Main {
                     }
 
                     break;
-                case 4:
+                case 8:
                     System.out.println("Informe a matrícula do aluno:");
                     matricula = readInt();
 
@@ -133,14 +163,14 @@ public class Main {
                     }
 
                     break;
-                case 5:
+                case 9:
                     System.out.println("Finalizando o programa");
                     break;
                 default:
                     System.out.println("Opção inválida");
                     break;
             }
-        } while (opcao != 5);
+        } while (opcao != 9);
 
         // insertAluno(10, "Maria", true);
         // insertAluno(20, "Pedro", false);
