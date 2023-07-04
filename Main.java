@@ -156,6 +156,8 @@ public class Main {
                             boolean ativo = true;
 
                             if (alunoService.insert(matricula, nome, ativo, curso) == true) {
+                                curso.insertAluno(alunoService.getByMatricula(matricula));
+
                                 System.out.println("Aluno inserido com sucesso");
                             } else {
                                 System.out.println("Falha ao tentar inserir o aluno");
